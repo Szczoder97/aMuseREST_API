@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Data;
 using Dtos.Lesson;
+using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace aMuseAPI.Services.LessonServies
@@ -11,9 +13,11 @@ namespace aMuseAPI.Services.LessonServies
     public class LessonService : ILessonService
     {
         private readonly IMapper _mapper;
-        public LessonService(IMapper mapper)
+        private readonly DataContext _dataContext;
+        public LessonService(IMapper mapper, DataContext dataContext)
         {
             _mapper = mapper;
+            _dataContext = dataContext;
 
         }
         private static List<Lesson> lessons = new List<Lesson>{
@@ -25,23 +29,25 @@ namespace aMuseAPI.Services.LessonServies
         {
             var serviceResponse = new ServiceResponse<GetLessonDto>();
             Lesson lesson = _mapper.Map<Lesson>(l);
-            lesson.id = lessons.Max(c => c.id) + 1;
-            lessons.Add(lesson);
-            serviceResponse.data = _mapper.Map<GetLessonDto>(lesson);
+            _dataContext.lessons.Add(lesson);
+            await _dataContext.SaveChangesAsync();
+            serviceResponse.data = 
             return serviceResponse;
         }
 
         public async Task<ServiceResponse<List<GetLessonDto>>> GetAllLessons()
         {
             var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
-            serviceResponse.data = lessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToList();
+            var dbLessons = await _dataContext.lessons.ToListAsync();
+            serviceResponse.data = dbLessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToList();
             return serviceResponse;
         }
 
         public async Task<ServiceResponse<GetLessonDto>> GetLessonById(int id)
         {
             var serviceResponse = new ServiceResponse<GetLessonDto>();
-            serviceResponse.data = _mapper.Map<GetLessonDto>(lessons.FirstOrDefault(c => c.id == id));
+            var dbLesson = await _dataContext.lessons.FirstOrDefaultAsync(c => c.id == id);
+            serviceResponse.data = _mapper.Map<GetLessonDto>(dbLesson);
             return serviceResponse;
 
         }
