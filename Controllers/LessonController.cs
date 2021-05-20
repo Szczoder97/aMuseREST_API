@@ -24,7 +24,7 @@ namespace aMuseAPI.Controllers
             return Ok(await _lessonService.GetAllLessons());
         }
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<GetLessonDto>>> AddLesson(AddLessonDto l){
+        public async Task<ActionResult<ServiceResponse<List<GetLessonDto>>>> AddLesson(AddLessonDto l){
             return Ok(await _lessonService.AddLesson(l));
         }
         [HttpPut]

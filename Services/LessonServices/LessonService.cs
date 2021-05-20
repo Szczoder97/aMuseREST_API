@@ -20,18 +20,13 @@ namespace aMuseAPI.Services.LessonServies
             _dataContext = dataContext;
 
         }
-        private static List<Lesson> lessons = new List<Lesson>{
-            new Lesson(),
-            new Lesson{id = 0, title = "pierwszy", text = "dsfjh", ytLink = "vfj"}
-        };
-
-        public async Task<ServiceResponse<GetLessonDto>> AddLesson(AddLessonDto l)
+          public async Task<ServiceResponse<List<GetLessonDto>>> AddLesson(AddLessonDto l)
         {
-            var serviceResponse = new ServiceResponse<GetLessonDto>();
+            var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
             Lesson lesson = _mapper.Map<Lesson>(l);
             _dataContext.lessons.Add(lesson);
             await _dataContext.SaveChangesAsync();
-            serviceResponse.data = 
+            serviceResponse.data = await _dataContext.lessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToListAsync();
             return serviceResponse;
         }
 
@@ -56,10 +51,11 @@ namespace aMuseAPI.Services.LessonServies
         {
             var serviceResponse = new ServiceResponse<GetLessonDto>();
             try{
-                Lesson lesson = lessons.FirstOrDefault(c => c.id == l.id);
+                Lesson lesson = await _dataContext.lessons.FirstOrDefaultAsync(c => c.id == l.id);
                 lesson.title = l.title;
                 lesson.text = l.text;
                 lesson.ytLink = l.ytLink;
+                await _dataContext.SaveChangesAsync();
                 serviceResponse.data = _mapper.Map<GetLessonDto>(lesson);
             }catch(Exception e){
                 serviceResponse.success = false;
@@ -72,9 +68,10 @@ namespace aMuseAPI.Services.LessonServies
         {
              var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
             try{
-                Lesson lesson = lessons.First(c => c.id == id);
-                lessons.Remove(lesson);
-                serviceResponse.data = lessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToList();
+                Lesson lesson = await _dataContext.lessons.FirstAsync(c => c.id == id);
+                _dataContext.lessons.Remove(lesson);
+                await _dataContext.SaveChangesAsync();
+                serviceResponse.data = _dataContext.lessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToList();
             }catch(Exception e){
                 serviceResponse.success = false;
                 serviceResponse.messsage = e.Message;
