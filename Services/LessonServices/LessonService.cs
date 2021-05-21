@@ -30,10 +30,10 @@ namespace aMuseAPI.Services.LessonServies
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetLessonDto>>> GetAllLessons()
+        public async Task<ServiceResponse<List<GetLessonDto>>> GetAllLessons(int userId)
         {
             var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
-            var dbLessons = await _dataContext.lessons.ToListAsync();
+            var dbLessons = await _dataContext.lessons.Where(c => c.author.id == userId).ToListAsync();
             serviceResponse.data = dbLessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToList();
             return serviceResponse;
         }

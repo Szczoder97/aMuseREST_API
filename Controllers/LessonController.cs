@@ -1,12 +1,16 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using aMuseAPI.Services.LessonServies;
 using Dtos.Lesson;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
 namespace aMuseAPI.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class LessonController : ControllerBase
@@ -21,10 +25,12 @@ namespace aMuseAPI.Controllers
         {
             return Ok(await _lessonService.GetLessonById(id));
         }
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<ServiceResponse<List<GetLessonDto>>>> GetAllLessons()
         {
-            return Ok(await _lessonService.GetAllLessons());
+            int id = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            return Ok(await _lessonService.GetAllLessons(id));
         }
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<List<GetLessonDto>>>> AddLesson(AddLessonDto l)
