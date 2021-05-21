@@ -4,14 +4,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace aMuseAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210521075411_User")]
+    partial class User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,9 +28,6 @@ namespace aMuseAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("authorid")
-                        .HasColumnType("int");
-
                     b.Property<string>("text")
                         .HasColumnType("nvarchar(max)");
 
@@ -40,8 +39,6 @@ namespace aMuseAPI.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("authorid");
-
                     b.ToTable("lessons");
                 });
 
@@ -51,9 +48,6 @@ namespace aMuseAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("email")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
@@ -70,20 +64,6 @@ namespace aMuseAPI.Migrations
                     b.HasKey("id");
 
                     b.ToTable("users");
-                });
-
-            modelBuilder.Entity("Models.Lesson", b =>
-                {
-                    b.HasOne("Models.User", "author")
-                        .WithMany("lessons")
-                        .HasForeignKey("authorid");
-
-                    b.Navigation("author");
-                });
-
-            modelBuilder.Entity("Models.User", b =>
-                {
-                    b.Navigation("lessons");
                 });
 #pragma warning restore 612, 618
         }

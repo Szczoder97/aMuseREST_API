@@ -10,5 +10,6 @@ namespace Data
             
         }
         public DbSet<Lesson> lessons {get; set;}
+        public DbSet<User> users {get; set;}
     }
 }
