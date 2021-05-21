@@ -20,7 +20,7 @@ namespace aMuseAPI.Services.LessonServies
             _dataContext = dataContext;
 
         }
-          public async Task<ServiceResponse<List<GetLessonDto>>> AddLesson(AddLessonDto l)
+        public async Task<ServiceResponse<List<GetLessonDto>>> AddLesson(AddLessonDto l)
         {
             var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
             Lesson lesson = _mapper.Map<Lesson>(l);
@@ -50,14 +50,17 @@ namespace aMuseAPI.Services.LessonServies
         public async Task<ServiceResponse<GetLessonDto>> UpdateLesson(UpdateLessonDto l)
         {
             var serviceResponse = new ServiceResponse<GetLessonDto>();
-            try{
+            try
+            {
                 Lesson lesson = await _dataContext.lessons.FirstOrDefaultAsync(c => c.id == l.id);
                 lesson.title = l.title;
                 lesson.text = l.text;
                 lesson.ytLink = l.ytLink;
                 await _dataContext.SaveChangesAsync();
                 serviceResponse.data = _mapper.Map<GetLessonDto>(lesson);
-            }catch(Exception e){
+            }
+            catch (Exception e)
+            {
                 serviceResponse.success = false;
                 serviceResponse.messsage = e.Message;
             }
@@ -66,13 +69,16 @@ namespace aMuseAPI.Services.LessonServies
 
         public async Task<ServiceResponse<List<GetLessonDto>>> RemoveLesson(int id)
         {
-             var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
-            try{
+            var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
+            try
+            {
                 Lesson lesson = await _dataContext.lessons.FirstAsync(c => c.id == id);
                 _dataContext.lessons.Remove(lesson);
                 await _dataContext.SaveChangesAsync();
                 serviceResponse.data = _dataContext.lessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToList();
-            }catch(Exception e){
+            }
+            catch (Exception e)
+            {
                 serviceResponse.success = false;
                 serviceResponse.messsage = e.Message;
             }
