@@ -57,11 +57,5 @@ namespace aMuseAPI.Controllers
             }
             return Ok(response);
         }
-        [HttpGet("user")]
-        public string GetUserId()
-        {
-            string id = GetUserId().ToString();
-            return id;
-        }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Data;
 using Dtos.Classroom;
+using Dtos.Lesson;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
@@ -29,6 +30,19 @@ namespace Services.ClassroomServices
             return response;
         }
 
+        public async Task<ServiceResponse<GetClassroomDto>> AddLessonToClassroom(int classroomId, AddLessonDto l)
+        {
+            var response = new ServiceResponse<GetClassroomDto>();
+            var dbClassroom = await _context.classrooms.FirstOrDefaultAsync(c => c.id == classroomId);
+            Lesson lesson = _mapper.Map<Lesson>(l);
+            lesson.classroom = dbClassroom;
+            _context.lessons.Add(lesson);
+            await _context.SaveChangesAsync();
+            response.data = _mapper.Map<GetClassroomDto>(dbClassroom);
+            return response;
+
+        }
+
         public async Task<ServiceResponse<List<GetClassroomDto>>> GetAllClassrooms()
         {
             var response = new ServiceResponse<List<GetClassroomDto>>();
@@ -40,9 +54,19 @@ namespace Services.ClassroomServices
         public async Task<ServiceResponse<GetClassroomDto>> GetClassroomById(int id)
         {
             var response = new ServiceResponse<GetClassroomDto>();
-            var dbClassrooms = await _context.classrooms.FirstOrDefaultAsync(c => c.id == id);
-            response.data = _mapper.Map<GetClassroomDto>(dbClassrooms);
+            var dbClassroom = await _context.classrooms.FirstOrDefaultAsync(c => c.id == id);
+            response.data = _mapper.Map<GetClassroomDto>(dbClassroom);
             return response;
+        }
+
+        public async Task<ServiceResponse<List<GetLessonDto>>> GetLessonsFromClassroom(int classroomId)
+        {
+            var response = new ServiceResponse<List<GetLessonDto>>();
+            var dbClassroom = await _context.classrooms.FirstOrDefaultAsync(c => c.id == classroomId);
+            var dbLessons = await _context.lessons.Where(c => c.classroom == dbClassroom).ToListAsync();
+            response.data = dbLessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToList();
+            return response;
+
         }
 
         public async Task<ServiceResponse<List<GetClassroomDto>>> RemoveClassroom(int id)

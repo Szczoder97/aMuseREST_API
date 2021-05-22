@@ -24,7 +24,7 @@ namespace aMuseAPI.Services.LessonServies
             _contextAccessor = contextAccessor;
 
         }
-        public int GetUserId() =>int.Parse(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
+        private int GetUserId() =>int.Parse(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
         public async Task<ServiceResponse<List<GetLessonDto>>> AddLesson(AddLessonDto l)
         {
             var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
@@ -38,7 +38,7 @@ namespace aMuseAPI.Services.LessonServies
         public async Task<ServiceResponse<List<GetLessonDto>>> GetAllLessons()
         {
             var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
-            var dbLessons = await _dataContext.lessons.Where(c => c.user.id == GetUserId()).ToListAsync();
+            var dbLessons = await _dataContext.lessons.ToListAsync();
             serviceResponse.data = dbLessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToList();
             return serviceResponse;
         }

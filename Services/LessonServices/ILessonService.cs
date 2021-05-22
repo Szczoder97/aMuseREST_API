@@ -11,6 +11,5 @@ namespace aMuseAPI.Services.LessonServies
         public Task<ServiceResponse<GetLessonDto>> GetLessonById(int id);
         public Task<ServiceResponse<GetLessonDto>> UpdateLesson(UpdateLessonDto l);
         public Task<ServiceResponse<List<GetLessonDto>>> RemoveLesson(int id);
-        public int GetUserId();
     }
 }
