@@ -29,8 +29,8 @@ namespace aMuseAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<ServiceResponse<List<GetLessonDto>>>> GetAllLessons()
         {
-            int id = int.Parse(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            return Ok(await _lessonService.GetAllLessons(id));
+            
+            return Ok(await _lessonService.GetAllLessons());
         }
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<List<GetLessonDto>>>> AddLesson(AddLessonDto l)
@@ -56,6 +56,12 @@ namespace aMuseAPI.Controllers
                 return NotFound(response);
             }
             return Ok(response);
+        }
+        [HttpGet("user")]
+        public string GetUserId()
+        {
+            string id = GetUserId().ToString();
+            return id;
         }
     }
 }

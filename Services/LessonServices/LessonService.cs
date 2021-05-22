@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Data;
 using Dtos.Lesson;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Models;
 
@@ -14,12 +16,15 @@ namespace aMuseAPI.Services.LessonServies
     {
         private readonly IMapper _mapper;
         private readonly DataContext _dataContext;
-        public LessonService(IMapper mapper, DataContext dataContext)
+        private readonly IHttpContextAccessor _contextAccessor;
+        public LessonService(IMapper mapper, DataContext dataContext, IHttpContextAccessor contextAccessor)
         {
             _mapper = mapper;
             _dataContext = dataContext;
+            _contextAccessor = contextAccessor;
 
         }
+        public int GetUserId() =>int.Parse(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
         public async Task<ServiceResponse<List<GetLessonDto>>> AddLesson(AddLessonDto l)
         {
             var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
@@ -30,10 +35,10 @@ namespace aMuseAPI.Services.LessonServies
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<List<GetLessonDto>>> GetAllLessons(int userId)
+        public async Task<ServiceResponse<List<GetLessonDto>>> GetAllLessons()
         {
             var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
-            var dbLessons = await _dataContext.lessons.Where(c => c.author.id == userId).ToListAsync();
+            var dbLessons = await _dataContext.lessons.Where(c => c.author.id == GetUserId()).ToListAsync();
             serviceResponse.data = dbLessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToList();
             return serviceResponse;
         }
