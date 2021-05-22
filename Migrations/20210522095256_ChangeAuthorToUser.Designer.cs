@@ -4,14 +4,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace aMuseAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210522095256_ChangeAuthorToUser")]
+    partial class ChangeAuthorToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,38 +21,12 @@ namespace aMuseAPI.Migrations
                 .HasAnnotation("ProductVersion", "5.0.6")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Models.Classroom", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("userid")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("userid");
-
-                    b.ToTable("classrooms");
-                });
-
             modelBuilder.Entity("Models.Lesson", b =>
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("classroomid")
-                        .HasColumnType("int");
 
                     b.Property<string>("text")
                         .HasColumnType("nvarchar(max)");
@@ -65,8 +41,6 @@ namespace aMuseAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
-
-                    b.HasIndex("classroomid");
 
                     b.HasIndex("userid");
 
@@ -100,39 +74,17 @@ namespace aMuseAPI.Migrations
                     b.ToTable("users");
                 });
 
-            modelBuilder.Entity("Models.Classroom", b =>
-                {
-                    b.HasOne("Models.User", "user")
-                        .WithMany("classrooms")
-                        .HasForeignKey("userid");
-
-                    b.Navigation("user");
-                });
-
             modelBuilder.Entity("Models.Lesson", b =>
                 {
-                    b.HasOne("Models.Classroom", "classroom")
-                        .WithMany("lessons")
-                        .HasForeignKey("classroomid");
-
                     b.HasOne("Models.User", "user")
                         .WithMany("lessons")
                         .HasForeignKey("userid");
 
-                    b.Navigation("classroom");
-
                     b.Navigation("user");
-                });
-
-            modelBuilder.Entity("Models.Classroom", b =>
-                {
-                    b.Navigation("lessons");
                 });
 
             modelBuilder.Entity("Models.User", b =>
                 {
-                    b.Navigation("classrooms");
-
                     b.Navigation("lessons");
                 });
 #pragma warning restore 612, 618

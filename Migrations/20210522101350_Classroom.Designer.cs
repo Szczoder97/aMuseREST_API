@@ -4,14 +4,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace aMuseAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210522101350_Classroom")]
+    partial class Classroom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,18 +28,18 @@ namespace aMuseAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("Userid")
+                        .HasColumnType("int");
+
                     b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("userid")
-                        .HasColumnType("int");
-
                     b.HasKey("id");
 
-                    b.HasIndex("userid");
+                    b.HasIndex("Userid");
 
                     b.ToTable("classrooms");
                 });
@@ -49,7 +51,7 @@ namespace aMuseAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("classroomid")
+                    b.Property<int?>("Classroomid")
                         .HasColumnType("int");
 
                     b.Property<string>("text")
@@ -66,7 +68,7 @@ namespace aMuseAPI.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("classroomid");
+                    b.HasIndex("Classroomid");
 
                     b.HasIndex("userid");
 
@@ -102,24 +104,20 @@ namespace aMuseAPI.Migrations
 
             modelBuilder.Entity("Models.Classroom", b =>
                 {
-                    b.HasOne("Models.User", "user")
+                    b.HasOne("Models.User", null)
                         .WithMany("classrooms")
-                        .HasForeignKey("userid");
-
-                    b.Navigation("user");
+                        .HasForeignKey("Userid");
                 });
 
             modelBuilder.Entity("Models.Lesson", b =>
                 {
-                    b.HasOne("Models.Classroom", "classroom")
+                    b.HasOne("Models.Classroom", null)
                         .WithMany("lessons")
-                        .HasForeignKey("classroomid");
+                        .HasForeignKey("Classroomid");
 
                     b.HasOne("Models.User", "user")
                         .WithMany("lessons")
                         .HasForeignKey("userid");
-
-                    b.Navigation("classroom");
 
                     b.Navigation("user");
                 });

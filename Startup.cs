@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Services.ClassroomServices;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace aMuseAPI
@@ -51,6 +52,7 @@ namespace aMuseAPI
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<ILessonService, LessonService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IClassroomService, ClassroomService>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => 
                 {

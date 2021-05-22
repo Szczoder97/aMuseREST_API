@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 namespace Models
 {
-    public class Lesson
+    public class Classroom
     {
         public int id {get; set;}
         public string title {get; set;}
-        public string text {get; set;}
-        public string ytLink {get; set;}
+        public string description {get; set;}
         public User user {get; set;}
-        public Classroom classroom {get; set;}
+        public List<Lesson> lessons {get; set;}
+
     }
 }

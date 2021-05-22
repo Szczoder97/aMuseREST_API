@@ -38,7 +38,7 @@ namespace aMuseAPI.Services.LessonServies
         public async Task<ServiceResponse<List<GetLessonDto>>> GetAllLessons()
         {
             var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
-            var dbLessons = await _dataContext.lessons.Where(c => c.author.id == GetUserId()).ToListAsync();
+            var dbLessons = await _dataContext.lessons.Where(c => c.user.id == GetUserId()).ToListAsync();
             serviceResponse.data = dbLessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToList();
             return serviceResponse;
         }

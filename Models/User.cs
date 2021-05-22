@@ -11,5 +11,6 @@ namespace Models
         public byte[] passwordHash {get; set;}
         public byte[] passwordSalt {get; set;}
         public List<Lesson> lessons {get; set;}
+        public List<Classroom> classrooms {get; set;}
     }
 }

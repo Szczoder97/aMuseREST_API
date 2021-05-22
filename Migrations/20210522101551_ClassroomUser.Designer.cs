@@ -4,14 +4,16 @@ using Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace aMuseAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210522101551_ClassroomUser")]
+    partial class ClassroomUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,7 +51,7 @@ namespace aMuseAPI.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("classroomid")
+                    b.Property<int?>("Classroomid")
                         .HasColumnType("int");
 
                     b.Property<string>("text")
@@ -66,7 +68,7 @@ namespace aMuseAPI.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("classroomid");
+                    b.HasIndex("Classroomid");
 
                     b.HasIndex("userid");
 
@@ -111,15 +113,13 @@ namespace aMuseAPI.Migrations
 
             modelBuilder.Entity("Models.Lesson", b =>
                 {
-                    b.HasOne("Models.Classroom", "classroom")
+                    b.HasOne("Models.Classroom", null)
                         .WithMany("lessons")
-                        .HasForeignKey("classroomid");
+                        .HasForeignKey("Classroomid");
 
                     b.HasOne("Models.User", "user")
                         .WithMany("lessons")
                         .HasForeignKey("userid");
-
-                    b.Navigation("classroom");
 
                     b.Navigation("user");
                 });
