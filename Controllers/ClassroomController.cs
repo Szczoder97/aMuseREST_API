@@ -9,7 +9,7 @@ using Services.ClassroomServices;
 
 namespace Controllers
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ClassroomController : ControllerBase
@@ -24,7 +24,7 @@ namespace Controllers
         {
             return Ok(await _classroomService.GetClassroomById(id));
         }
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<ServiceResponse<List<GetClassroomDto>>>> GetAllClassrooms()
         {
