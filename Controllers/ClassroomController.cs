@@ -66,6 +66,11 @@ namespace Controllers
         {
             return Ok(await _classroomService.GetLessonsFromClassroom(id));
         }
+        [HttpGet("my")]
+        public async Task<ActionResult<List<GetClassroomDto>>> GetMyClassrooms()
+        {
+            return Ok(await _classroomService.GetMyClassrooms());
+        }
     }
 }
 

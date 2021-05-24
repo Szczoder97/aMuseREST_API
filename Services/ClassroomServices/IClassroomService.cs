@@ -15,5 +15,6 @@ namespace Services.ClassroomServices
         public Task<ServiceResponse<List<GetClassroomDto>>> RemoveClassroom(int id);
         public Task<ServiceResponse<GetClassroomDto>> AddLessonToClassroom(int classroomId, AddLessonDto l);
         public Task<ServiceResponse<List<GetLessonDto>>> GetLessonsFromClassroom(int classroomId);
+        public Task<ServiceResponse<List<GetClassroomDto>>> GetMyClassrooms();
     }
 }

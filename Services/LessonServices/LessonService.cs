@@ -25,24 +25,6 @@ namespace aMuseAPI.Services.LessonServies
 
         }
         private int GetUserId() =>int.Parse(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier));
-        public async Task<ServiceResponse<List<GetLessonDto>>> AddLesson(AddLessonDto l)
-        {
-            var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
-            Lesson lesson = _mapper.Map<Lesson>(l);
-            _dataContext.lessons.Add(lesson);
-            await _dataContext.SaveChangesAsync();
-            serviceResponse.data = await _dataContext.lessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToListAsync();
-            return serviceResponse;
-        }
-
-        public async Task<ServiceResponse<List<GetLessonDto>>> GetAllLessons()
-        {
-            var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
-            var dbLessons = await _dataContext.lessons.ToListAsync();
-            serviceResponse.data = dbLessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToList();
-            return serviceResponse;
-        }
-
         public async Task<ServiceResponse<GetLessonDto>> GetLessonById(int id)
         {
             var serviceResponse = new ServiceResponse<GetLessonDto>();
@@ -57,12 +39,20 @@ namespace aMuseAPI.Services.LessonServies
             var serviceResponse = new ServiceResponse<GetLessonDto>();
             try
             {
-                Lesson lesson = await _dataContext.lessons.FirstOrDefaultAsync(c => c.id == l.id);
-                lesson.title = l.title;
-                lesson.text = l.text;
-                lesson.ytLink = l.ytLink;
-                await _dataContext.SaveChangesAsync();
-                serviceResponse.data = _mapper.Map<GetLessonDto>(lesson);
+                Lesson lesson = await _dataContext.lessons.FirstOrDefaultAsync(c => c.id == l.id && c.user.id == GetUserId());
+                if(lesson != null)
+                {
+                    lesson.title = l.title;
+                    lesson.text = l.text;
+                    lesson.ytLink = l.ytLink;
+                    await _dataContext.SaveChangesAsync();
+                    serviceResponse.data = _mapper.Map<GetLessonDto>(lesson);
+                }
+                else
+                {
+                    serviceResponse.success = false;
+                    serviceResponse.messsage = "Not found!";
+                }
             }
             catch (Exception e)
             {
@@ -77,10 +67,20 @@ namespace aMuseAPI.Services.LessonServies
             var serviceResponse = new ServiceResponse<List<GetLessonDto>>();
             try
             {
-                Lesson lesson = await _dataContext.lessons.FirstAsync(c => c.id == id);
-                _dataContext.lessons.Remove(lesson);
-                await _dataContext.SaveChangesAsync();
-                serviceResponse.data = _dataContext.lessons.Select(c => _mapper.Map<GetLessonDto>(c)).ToList();
+                Lesson lesson = await _dataContext.lessons.FirstOrDefaultAsync(c => c.id == id && c.user.id == GetUserId());
+                if(lesson != null)
+                {
+                    _dataContext.lessons.Remove(lesson);
+                    await _dataContext.SaveChangesAsync();
+                    serviceResponse.data = _dataContext.lessons
+                    .Select(c => _mapper.Map<GetLessonDto>(c)).ToList();
+                }
+                else
+                {
+                    serviceResponse.success = false;
+                    serviceResponse.messsage = "Not found!";
+                }
+                
             }
             catch (Exception e)
             {

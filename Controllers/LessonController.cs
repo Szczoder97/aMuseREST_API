@@ -25,18 +25,6 @@ namespace aMuseAPI.Controllers
         {
             return Ok(await _lessonService.GetLessonById(id));
         }
-        [AllowAnonymous]
-        [HttpGet]
-        public async Task<ActionResult<ServiceResponse<List<GetLessonDto>>>> GetAllLessons()
-        {
-            
-            return Ok(await _lessonService.GetAllLessons());
-        }
-        [HttpPost]
-        public async Task<ActionResult<ServiceResponse<List<GetLessonDto>>>> AddLesson(AddLessonDto l)
-        {
-            return Ok(await _lessonService.AddLesson(l));
-        }
         [HttpPut]
         public async Task<ActionResult<ServiceResponse<GetLessonDto>>> UpdateLesson(UpdateLessonDto l)
         {
