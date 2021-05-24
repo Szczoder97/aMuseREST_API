@@ -81,11 +81,17 @@ namespace aMuseAPI
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "aMuseAPI v1"));
+                app.UseCors(x => x
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials()); // allow credentials
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            
 
             app.UseAuthentication();
 
