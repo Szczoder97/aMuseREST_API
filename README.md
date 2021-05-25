@@ -1,6 +1,7 @@
 # aMuseREST_API
 
-<h3>Back-end do webowego portalu społecznościowego przeznaczonego do zamieszczania kursów, z których mogą korzystać pozostałe osoby społeczności. </h3> 
+Back-end do webowego portalu społecznościowego przeznaczonego do zamieszczania kursów, z których mogą korzystać pozostałe osoby społeczności.</br>
+Repozytorium z aMuse front-end: https://github.com/PatrykPawlowicz/aMuse_front-end
 <h2>1. Charakterystyka oprogramowania:</h2>
 
 <h2>Nazwa skrócona:</h2> <b>aMuse</b>
