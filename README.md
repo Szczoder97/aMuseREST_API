@@ -1,7 +1,7 @@
 # aMuseREST_API
 
 <h3>Back-end do webowego portalu społecznościowego przeznaczonego do zamieszczania kursów, z których mogą korzystać pozostałe osoby społeczności. </h3> 
-<h1>1. Charakterystyka oprogramowania:</h1>
+<h2>1. Charakterystyka oprogramowania:</h2>
 
 <h2>Nazwa skrócona:</h2> <b>aMuse</b>
 
@@ -76,7 +76,7 @@ a) <b>Wymagania produktowe</b></br>
 <li> Środowisko testowe powinno być stworzone w taki sposób aby funkcjonalność aplikacji była możliwa do przetestowania.</li>
 </ol>
 
-b)<b>Wymagania organizacyjne</b></br>
+b) <b>Wymagania organizacyjne</b></br>
 
 <ol>
 <li> Głównym środowiskiem działania aplikacji webowej będą komputery stacjonarne oraz laptopy - wersja domyślna będzie stworzona pod kątem użytkowania strony aplikacji w wersji komputerowej. Będzie ona jednak również obsługiwana na urządzeniach mobilnych, takich jak tablety, smartphone'y oraz podobnych modyfikacjach tych urządzeń, jeśli tylko będą one posiadały aktywny dostęp do Internetu oraz aktualną przeglądarkę dowolnej marki. </li> 
