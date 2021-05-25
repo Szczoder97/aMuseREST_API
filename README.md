@@ -25,9 +25,24 @@ Licencja: Open source
 
 Identyfikator: auth </br>
 Nazwa krótka: Autentykacja </br>
-Opis: Możliwość rejestracji, logowania oraz nadawania funkcji użytkownikom studentów i  nauczycieli </br>
+Opis: Możiwość rejestracji oraz logowania do serwisu internetowego za pośrednictwem maila i hasła</br>
+Identyfikacja użytkownika następuje na podstawie JWT. </br>
 Priorytet: 1 </br>
 
+Identyfikator: Bezp </br>
+Nazwa krótka: Bezpieczeństwo </br>
+Opis: <ul>
+      <li>Hasła przechowywane w bazie danych są zaszyfrowane, administrator systemu nie ma do nich dostępu</li>
+      <li>Java Web Token ma żywotność 24h - po tym czasie zapytania HTTP nie będą obsługiwane</li>
+      <li>Poszczególne endpointy są zabezpieczone przed nieautoryzowanym dostępem, tylko właściciel zasobu może go edytować lub usunąć</li>
+      </ul>
+
+Priorytet: 1 </br>
+
+Identyfikator: gc</br>
+Nazwa krótka: Zarządzanie klasami</br> 
+Opis: Użytkownik systemu ma możliwość przeglądania listy klas z głównego widoku strony. Może również dodawać własne klasy uzupełniając je o pola: tytuł, opis. Właściciel klasy ma możliwośc edycji, oraz usunięcia niechcianej klasy. Do każdej klasy właściciel może dodać nieograniczoną liczbę lekcji. Wchodząc na daną klasę wyświetlają się jej szczegółowe informacje oraz lista lekcji</br>
+Priorytet: 1</br>
 
 Identyfikator cc </br>
 Nazwa krótka: Zarządzanie lekcjami </br>
@@ -35,15 +50,9 @@ Opis: Operacje CRUD na modelu lekcje, lekcja zawiera w sobie pola: </br>
 - autor </br>
 - tytuł </br>
 - treść </br>
-Priorytet: 1 </br>
+Priorytet: 2 </br>
 
-Identyfikator: gc</br>
-Nazwa krótka: Zarządzanie grupami</br> 
-Opis: Operacje CRUD na modelu grup, które zawierają w sobie modele lekcji i uczestników.
-      Z widoku grupy widać listę lekcji i uczestników.</br>
-Priorytet: 2</br>
-
-Identyfikator: Q&A</br>
+Identyfikator: </br>
 Nazwa krótka: Pytania uczestników</br>
 Opis: Dodanie sekcji pytań odnoszących się do danej lekcji w postaci listy, z możliwością odwołania się do poszczególnych pytań.</br> 
 Priorytet: 3</br>
