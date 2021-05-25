@@ -23,13 +23,14 @@ Licencja: Open source
 <h3>Wymagania funkcjonalne</h3>
 
 
-Identyfikator: auth </br>
+Identyfikator: AUTH </br>
 Nazwa krótka: Autentykacja </br>
-Opis: Możiwość rejestracji oraz logowania do serwisu internetowego za pośrednictwem maila i hasła</br>
-Identyfikacja użytkownika następuje na podstawie JWT. </br>
+Opis: <ul> <li>Możiwość rejestracji oraz logowania do serwisu internetowego za pośrednictwem maila i hasła</li>
+      <li>Identyfikacja użytkownika następuje na podstawie JWT.</li>
+      </ul>
 Priorytet: 1 </br>
 
-Identyfikator: Bezp </br>
+Identyfikator: SEC </br>
 Nazwa krótka: Bezpieczeństwo </br>
 Opis: <ul>
       <li>Hasła przechowywane w bazie danych są zaszyfrowane, administrator systemu nie ma do nich dostępu</li>
@@ -39,41 +40,51 @@ Opis: <ul>
 
 Priorytet: 1 </br>
 
-Identyfikator: gc</br>
+Identyfikator: CC </br>
 Nazwa krótka: Zarządzanie klasami</br> 
-Opis: Użytkownik systemu ma możliwość przeglądania listy klas z głównego widoku strony. Może również dodawać własne klasy uzupełniając je o pola: tytuł, opis. Właściciel klasy ma możliwośc edycji, oraz usunięcia niechcianej klasy. Do każdej klasy właściciel może dodać nieograniczoną liczbę lekcji. Wchodząc na daną klasę wyświetlają się jej szczegółowe informacje oraz lista lekcji</br>
+Opis: <ul><li>Uwierzytelniony użytkownik systemu ma możliwość przeglądania listy klas z głównego widoku strony.</li> 
+      <li>Może również dodawać własne klasy uzupełniając je o pola: tytuł, opis. </li>
+      <li>Właściciel klasy ma możliwośc edycji, oraz usunięcia niechcianej klasy. </li>
+      <li>Do każdej klasy właściciel może dodać nieograniczoną liczbę lekcji.</li>
+      <li>Wchodząc na daną klasę wyświetlają się jej szczegółowe informacje oraz lista lekcji</li></ul>
+      
 Priorytet: 1</br>
 
-Identyfikator cc </br>
+Identyfikator LC </br>
 Nazwa krótka: Zarządzanie lekcjami </br>
-Opis: Operacje CRUD na modelu lekcje, lekcja zawiera w sobie pola: </br>
-- autor </br>
-- tytuł </br>
-- treść </br>
+Opis: <ul><li>Uwierzytelniony użytkownik systemu ma możliwość przeglądania listy lekcji z głównego widoku klasy.</li> 
+      <li>Właściciel klasy może tworzyć przypisane do niej lekcje</li>
+      <li>Właściciel klasy ma możliwośc edycji, oraz usunięcia niechcianej lekcji. </li>
+      <li>Tworząc zasób lekcji należy podać tytuł, zawartość lekcji oraz link do filmiku na serwisie YouTube</li>
+      <li>Wchodząc na daną lekcję wyświetlają się jej zawartość oraz okienko z filmiem</li></ul>
 Priorytet: 2 </br>
 
-Identyfikator: </br>
-Nazwa krótka: Pytania uczestników</br>
+Identyfikator: CONTACT </br>
+Nazwa krótka: Sekcja kontakt</br>
 Opis: Dodanie sekcji pytań odnoszących się do danej lekcji w postaci listy, z możliwością odwołania się do poszczególnych pytań.</br> 
 Priorytet: 3</br>
 
 <h3>Wymagania niefunkcjonalne</h3>
 
 a) Wymagania produktowe</br>
-
-- System będzie posiadał przyjazny interfejs graficzny oraz rozbudowane centrum pomocy w obsłudze, co umożliwi bezproblemowe użytkowanie dla wszystkich osób, niezależnie od posiadania niewielkiej lub całkowitego braku  umiejętności w obsłudze podobnych systemów.</br>
-- Przewiduje się dużą niezawodność: system powinien być w stanie działać bezawaryjnie 24 godziny na dobę, z możliwą awarią lub nieaktywnością w nie więcej niż 1 dzień na miesiąc, gdzie usunięcie awarii lub ponowna aktywacja systemu nie powinna zająć doświadczonemu informatykowi dłużej niż 2 godziny.</br>
-- Transfer  wszystkich danych przesyłanych między klientami a systemem zostanie zabezpieczony protokołem SSL, a wszystkie dane przechowywane przez system będą zabezpieczone poprzez zabezpieczenia systemu operacyjnego, na którym zostanie zainstalowany, a także poprzez awaryjną replikę bazy danych, co zapewni bezpieczeństwo danych przed ewentualnymi próbami włamań lub jej utratą.</br>
-- Środowisko testowe powinno być stworzone w taki sposób aby funkcjonalność aplikacji była możliwa do przetestowania.</br>
+<ol>
+<li>System będzie posiadał przyjazny interfejs graficzny, co umożliwi bezproblemowe użytkowanie dla wszystkich osób, niezależnie od posiadania niewielkiej lub całkowitego braku  umiejętności w obsłudze podobnych systemów.</li>
+<li>Przewiduje się dużą niezawodność: system powinien być w stanie działać bezawaryjnie 24 godziny na dobę, z możliwą awarią lub nieaktywnością w nie więcej niż 1 dzień na miesiąc, gdzie usunięcie awarii lub ponowna aktywacja systemu nie powinna zająć doświadczonemu informatykowi dłużej niż 2 godziny.</li>
+<li> Wszystkie dane przechowywane przez system będą zabezpieczone poprzez zabezpieczenia systemu operacyjnego, na którym zostanie zainstalowany.</li>
+<li> Środowisko testowe powinno być stworzone w taki sposób aby funkcjonalność aplikacji była możliwa do przetestowania.</li>
+</ol>
 
 b) Wymagania organizacyjne</br>
 
-- Głównym środowiskiem działania aplikacji webowej będą komputery stacjonarne - wersja domyślna będzie stworzona pod kątem użytkowania strony aplikacji w wersji komputerowej. Będzie ona jednak również obsługiwany na urządzeniach mobilnych, takich jak tablety, smartphone'y oraz podobnych modyfikacjach tych urządzeń, jeśli tylko będą one posiadały aktywny dostęp do Internetu oraz aktualną przeglądarkę dowolnej marki.</br> 
-- Ze względu na swoją dużą kompatybilność, jedynymi wymaganiami implementacyjnymi będzie w pełni sprawny serwer z bazą danych o pojemności wspomnianej wcześniej, stały dostęp do Internetu, przynajmniej jeden w pełni sprawny terminal dostępu ( komputer osobisty ) oraz przynajmniej jedna osoba z doświadczeniem  informatycznym z zakresu obsługi podobnych systemów.</br>
+<ol>
+<li> Głównym środowiskiem działania aplikacji webowej będą komputery stacjonarne oraz laptopy - wersja domyślna będzie stworzona pod kątem użytkowania strony aplikacji w wersji komputerowej. Będzie ona jednak również obsługiwana na urządzeniach mobilnych, takich jak tablety, smartphone'y oraz podobnych modyfikacjach tych urządzeń, jeśli tylko będą one posiadały aktywny dostęp do Internetu oraz aktualną przeglądarkę dowolnej marki. </li> 
+<li> Ze względu na swoją dużą kompatybilność, jedynymi wymaganiami implementacyjnymi będzie w pełni sprawny serwer z bazą danych, stały dostęp do Internetu, przynajmniej jeden w pełni sprawny terminal dostępu ( komputer osobisty ) oraz przynajmniej jedna osoba z doświadczeniem informatycznym z zakresu obsługi podobnych systemów.</li>
+</ol>
 
 c) Wymagania zewnętrzne</br>
-
-- W celu ścisłej ochrony prywatności i zapewnienia ochrony informacji konta wszystkich klientów będą zabezpieczone hasłami znanymi tylko dla nich. Zarówno personel firmy, jak i osoby zewnętrzne nie będą miały dostępu do tych kont, a użytkownik nie będzie zmuszony podawać więcej informacji przy dokonywaniu płatności niż jest to konieczne.</br>
+<ol>
+<li> W celu ścisłej ochrony prywatności i zapewnienia ochrony informacji konta wszystkich klientów będą zabezpieczone hasłami znanymi tylko dla nich. Zarówno personel firmy, jak i osoby zewnętrzne nie będą miały dostępu do tych kont.</li>
+</ol>
 
 <h2> 5. Architektura systemu/oprogramowania </h2>
 
@@ -90,29 +101,64 @@ Przeznaczenie produktu: Warstwa domenowa i warstwa infrastruktury </br>
 Wersja: Core </br>
 
 Lp. 3 </br>
+Nazwa produktu: AutoMapper </br>
+Przeznaczenie produktu: Mapowanie obiektów domentowych na obiekty DTO </br>
+Wersja: 8.1.1 </br>
+
+Lp. 4 </br>
+Nazwa produktu: NUnit </br>
+Przeznaczenie produktu: Testy jednostkowe, end to end </br>
+Wersja: 13 </br>
+Lp. 5 </br>
 Nazwa produktu: NUnit </br>
 Przeznaczenie produktu: Testy jednostkowe, end to end </br>
 Wersja: 13 </br>
 
-Lp. 4 </br>
+Lp. 6 </br>
 Nazwa produktu: VUE </br>
 Przeznaczenie produktu: Warstwa Front end </br>
 Wersja: 3 </br>
 
-Lp. 5 </br>
+Lp. 7 </br>
 Nazwa produktu: MsSQL </br>
 Przeznaczenie produktu: baza danych </br>
 Wersja: 11</br>
+
+Lp. 8 </br>
+Nazwa produktu: Entity Framework Core SQLServer
+Przeznaczenie produktu: Warstwa komunikacji interfejsu Web API z bazą danych MsSQL, mapowanie modeli domenowych na tabele w bazie danych </br>
+Wersja: 5.0.6
+
+Lp. 9 </br>
+Nazwa produktu: IdentityModel.Token.JWT
+Przeznaczenie produktu: Generowanie JWT </br>
+Wersja: 6.11.0
+
+Lp. 10 </br>
+Nazwa produktu: Microsoft.AspNetCore.Authentication.JwtBearer
+Przeznaczenie produktu: Autoryzacja na podstawie tokenu JWT </br>
+Wersja: 5.0.6
 
 
 B. Architektura uruchomieniowa:
 
 Lp. 1</br>
-NET Core</br>
+Nazwa produktu: .NET Core</br>
+Przeznaczenie produktu: Środowisko uruchomieniowe
 Wersja: 5</br>
 
 Lp. 2 </br>
-Baza danych MsSQL</br>
-Wersja: 11</br>
+Nazwa produktu: Baza danych MsSQL</br>
+Przeznaczenie produktu: Przechowywanie danych użytkowników
+Wersja: EXPRESS </br>
 
+Lp. 3</br>
+Nazwa produktu: Swashbuckle.AspNetCore</br>
+Przeznaczenie produktu: Uruchomienie klienta Swagger w celu testowania manualnego
+Wersja: 5.6.3 </br>
+
+Lp. 4</br>
+Nazwa produktu: Swashbuckle.AspNetCore.Filters</br>
+Przeznaczenie produktu: Rozszerzenie funkcjonalności klienta Swagger o autentykację
+Wersja: 7.0.2</br>
 
