@@ -7,7 +7,9 @@
 
 <h2>Nazwa pełna:</h2> <b>Online Music Academy</b>
 
-<h3>Opis:</h3> Portal społecznościowy umożliwiający zamieszczanie kursów oraz uczesnictwo w kursach stworzonych przez inne osoby ze społeczności . 
+<h3>Opis:</h3> Aplikacja internetowa gromadząca społeczność zainteresowaną edukacją muzyczną. </br> 
+Każdy użytkownik może dzielić się swoją wiedzą oraz czerpać inspirację od bardziej doświadczonych osób. </br>
+Serwis jest bezpłatny a wszystkie informacje udostępnione na nim mają za zadanie rozwijać pasje jego członków. </br>
 
 <h3>Cele:</h3>
 - tworzenie lekcji na zasadzie artykułów z danego zagadnienia z możliwością przesłania danych binarnych
@@ -23,15 +25,15 @@ Licencja: Open source
 <h3>Wymagania funkcjonalne</h3>
 
 
-Identyfikator: AUTH </br>
-Nazwa krótka: Autentykacja </br>
+<b>Identyfikator: AUTH </b></br>
+<b>Nazwa krótka: Autentykacja </b></br>
 Opis: <ul> <li>Możiwość rejestracji oraz logowania do serwisu internetowego za pośrednictwem maila i hasła</li>
       <li>Identyfikacja użytkownika następuje na podstawie JWT.</li>
       </ul>
 Priorytet: 1 </br>
 
-Identyfikator: SEC </br>
-Nazwa krótka: Bezpieczeństwo </br>
+<b>Identyfikator: SEC </b></br>
+<b>Nazwa krótka: Bezpieczeństwo </b></br>
 Opis: <ul>
       <li>Hasła przechowywane w bazie danych są zaszyfrowane, administrator systemu nie ma do nich dostępu</li>
       <li>Java Web Token ma żywotność 24h - po tym czasie zapytania HTTP nie będą obsługiwane</li>
@@ -40,8 +42,8 @@ Opis: <ul>
 
 Priorytet: 1 </br>
 
-Identyfikator: CC </br>
-Nazwa krótka: Zarządzanie klasami</br> 
+<b>Identyfikator: CC </b></br>
+<b>Nazwa krótka: Zarządzanie klasami </b></br> 
 Opis: <ul><li>Uwierzytelniony użytkownik systemu ma możliwość przeglądania listy klas z głównego widoku strony.</li> 
       <li>Może również dodawać własne klasy uzupełniając je o pola: tytuł, opis. </li>
       <li>Właściciel klasy ma możliwośc edycji, oraz usunięcia niechcianej klasy. </li>
@@ -50,8 +52,8 @@ Opis: <ul><li>Uwierzytelniony użytkownik systemu ma możliwość przeglądania 
       
 Priorytet: 1</br>
 
-Identyfikator LC </br>
-Nazwa krótka: Zarządzanie lekcjami </br>
+<b>Identyfikator LC </b></br>
+<b>Nazwa krótka: Zarządzanie lekcjami </b></br>
 Opis: <ul><li>Uwierzytelniony użytkownik systemu ma możliwość przeglądania listy lekcji z głównego widoku klasy.</li> 
       <li>Właściciel klasy może tworzyć przypisane do niej lekcje</li>
       <li>Właściciel klasy ma możliwośc edycji, oraz usunięcia niechcianej lekcji. </li>
@@ -59,14 +61,14 @@ Opis: <ul><li>Uwierzytelniony użytkownik systemu ma możliwość przeglądania 
       <li>Wchodząc na daną lekcję wyświetlają się jej zawartość oraz okienko z filmiem</li></ul>
 Priorytet: 2 </br>
 
-Identyfikator: CONTACT </br>
-Nazwa krótka: Sekcja kontakt</br>
-Opis: Dodanie sekcji pytań odnoszących się do danej lekcji w postaci listy, z możliwością odwołania się do poszczególnych pytań.</br> 
+<b>Identyfikator: CONTACT </b></br>
+<b>Nazwa krótka: Sekcja kontakt </b></br>
+Opis: Umożliwienie komunikacji z autorem poszczególnych klas</br> 
 Priorytet: 3</br>
 
 <h3>Wymagania niefunkcjonalne</h3>
 
-a) Wymagania produktowe</br>
+a) <b>Wymagania produktowe</b></br>
 <ol>
 <li>System będzie posiadał przyjazny interfejs graficzny, co umożliwi bezproblemowe użytkowanie dla wszystkich osób, niezależnie od posiadania niewielkiej lub całkowitego braku  umiejętności w obsłudze podobnych systemów.</li>
 <li>Przewiduje się dużą niezawodność: system powinien być w stanie działać bezawaryjnie 24 godziny na dobę, z możliwą awarią lub nieaktywnością w nie więcej niż 1 dzień na miesiąc, gdzie usunięcie awarii lub ponowna aktywacja systemu nie powinna zająć doświadczonemu informatykowi dłużej niż 2 godziny.</li>
@@ -74,21 +76,21 @@ a) Wymagania produktowe</br>
 <li> Środowisko testowe powinno być stworzone w taki sposób aby funkcjonalność aplikacji była możliwa do przetestowania.</li>
 </ol>
 
-b) Wymagania organizacyjne</br>
+b)<b>Wymagania organizacyjne</b></br>
 
 <ol>
 <li> Głównym środowiskiem działania aplikacji webowej będą komputery stacjonarne oraz laptopy - wersja domyślna będzie stworzona pod kątem użytkowania strony aplikacji w wersji komputerowej. Będzie ona jednak również obsługiwana na urządzeniach mobilnych, takich jak tablety, smartphone'y oraz podobnych modyfikacjach tych urządzeń, jeśli tylko będą one posiadały aktywny dostęp do Internetu oraz aktualną przeglądarkę dowolnej marki. </li> 
 <li> Ze względu na swoją dużą kompatybilność, jedynymi wymaganiami implementacyjnymi będzie w pełni sprawny serwer z bazą danych, stały dostęp do Internetu, przynajmniej jeden w pełni sprawny terminal dostępu ( komputer osobisty ) oraz przynajmniej jedna osoba z doświadczeniem informatycznym z zakresu obsługi podobnych systemów.</li>
 </ol>
 
-c) Wymagania zewnętrzne</br>
+c) <b>Wymagania zewnętrzne</b></br>
 <ol>
 <li> W celu ścisłej ochrony prywatności i zapewnienia ochrony informacji konta wszystkich klientów będą zabezpieczone hasłami znanymi tylko dla nich. Zarówno personel firmy, jak i osoby zewnętrzne nie będą miały dostępu do tych kont.</li>
 </ol>
 
 <h2> 5. Architektura systemu/oprogramowania </h2>
 
-A. Architektura rozwoju</br>
+A. <b>Architektura rozwoju</b></br>
 
 Lp. 1 </br>
 Nazwa produktu: ASP .NET Core </br>
@@ -140,7 +142,7 @@ Przeznaczenie produktu: Autoryzacja na podstawie tokenu JWT </br>
 Wersja: 5.0.6
 
 
-B. Architektura uruchomieniowa:
+B. <b>Architektura uruchomieniowa: </b>
 
 Lp. 1</br>
 Nazwa produktu: .NET Core</br>
