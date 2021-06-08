@@ -97,7 +97,7 @@ namespace Services.ClassroomServices
                 Classroom classroom = await _context.classrooms.FirstOrDefaultAsync(c => c.id == id && c.user.id == GetUserId());
                 if(classroom != null)
                 {
-                     _context.classrooms.Remove(classroom);
+                _context.classrooms.Remove(classroom);
                 await _context.SaveChangesAsync();
                 response.data = _context.classrooms
                 .Where(c => c.user.id == GetUserId())
